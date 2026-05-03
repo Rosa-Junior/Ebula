@@ -1,20 +1,24 @@
 import React from "react";
 
-import {Text
-
-} from "react-native";
-import { View } from "react-native/types_generated/index";
+import {
+    Text,
+    View
+} from "react-native";  
 
 import { styles } from "./styles";
 
 export default function Login() {
     return (
-        <View>
-            <View>
-                <View>
-
-                </View>
+        <View style={styles.container}>
+            <View style={styles.boxTop}>
+                <Text>Login</Text>
             </View>
-        </View>>
-    );
+            <View style={styles.boxMid}>
+                <Text>Mid</Text> 
+            </View>
+                <View style={styles.boxBottom}>
+                    <Text>Bottom</Text>
+                </View>    
+        </View>
+    )
     }
