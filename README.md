@@ -16,3 +16,8 @@ Para instalação das dependências;
 <h2>npx expo start</h2>
 Para acessar o ambiente de desenvolvimento expo.
 -Ler QR code com o app Expo GO ou apertar "a" para abrir no Android Studio.
+
+<h1>Técnicas</h1>
+
+-TypeScript
+-Expo
