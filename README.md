@@ -20,4 +20,5 @@ Para acessar o ambiente de desenvolvimento expo.
 <h1>Técnicas</h1>
 
 -TypeScript
+
 -Expo
