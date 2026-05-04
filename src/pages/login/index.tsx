@@ -23,13 +23,13 @@ export default function Login() {
             <View style={styles.boxMid}>
                 <Text style={styles.titleImput}>E-mail</Text>
                 <View style={styles.boxInput}>
-                    <TextInput>Digite seu e-mail
+                    <TextInput>
                     </TextInput>
                 
                 </View>
                 <Text style={styles.titleImput}>Senha</Text>
                 <View style={styles.boxInput}>  
-                    <TextInput>Digite sua senha
+                    <TextInput>
                     </TextInput>
                 </View>    
             </View>
