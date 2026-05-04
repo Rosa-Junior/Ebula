@@ -25,15 +25,15 @@ export default function Login() {
                 <View style={styles.boxInput}>
                     <TextInput>Digite seu e-mail
                     </TextInput>
+                
                 </View>
-            </View>
-            <View style={styles.boxBottom}>
                 <Text style={styles.titleImput}>Senha</Text>
-                <View style={styles.boxInput}>
-                    
+                <View style={styles.boxInput}>  
                     <TextInput>Digite sua senha
                     </TextInput>
                 </View>    
+            </View>
+            <View style={styles.boxBottom}>
             </View>    
         </View>
     )

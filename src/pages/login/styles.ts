@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     boxTop: {  
         height: Dimensions.get("window").height/3,
         width: "100%",
-        backgroundColor: "#e1e2f5",
+        backgroundColor: "#e3e4fd",
         alignItems: "center",
         justifyContent: "center",
     },
