@@ -36,5 +36,11 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         color: "#fff",
         marginTop: 20,
+    },
+    boxInput: {
+        backgroundColor: "#fff",
+        borderRadius: 10,
+        marginTop: 10,
+        paddingHorizontal: 10,
     }
 })

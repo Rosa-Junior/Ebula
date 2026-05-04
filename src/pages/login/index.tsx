@@ -22,15 +22,19 @@ export default function Login() {
             </View>
             <View style={styles.boxMid}>
                 <Text style={styles.titleImput}>E-mail</Text>
-                <TextInput>
-                </TextInput>
+                <View style={styles.boxInput}>
+                    <TextInput>Digite seu e-mail
+                    </TextInput>
+                </View>
             </View>
-                <View style={styles.boxBottom}>
-                    <Text style={styles.titleImput}>Senha</Text>
-                    <TextInput>
-                        Digite sua senha
+            <View style={styles.boxBottom}>
+                <Text style={styles.titleImput}>Senha</Text>
+                <View style={styles.boxInput}>
+                    
+                    <TextInput>Digite sua senha
                     </TextInput>
                 </View>    
+            </View>    
         </View>
     )
     }
