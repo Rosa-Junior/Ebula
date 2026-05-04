@@ -1,5 +1,4 @@
-import { StyleSheet } from "react-native"; 
-
+import { Dimensions, StyleSheet } from "react-native"; 
 
 
 export const styles = StyleSheet.create({
@@ -7,17 +6,35 @@ export const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
+        backgroundColor: "#878af6",
     },
-    boxTop: {
-        height: 200,
-        backgroundColor: "red"
+    boxTop: {  
+        height: Dimensions.get("window").height/3,
+        width: "100%",
+        backgroundColor: "#e1e2f5",
+        alignItems: "center",
+        justifyContent: "center",
     },
     boxMid: {
-        height: 200,
-        backgroundColor: "red"
+        height: Dimensions.get("window").height/3,
+        width: "100%",
+        backgroundColor: "#7082d1",
+        paddingHorizontal: 40,
+
     },
     boxBottom: {
-        height: 200,
-        backgroundColor: "red"
-    }   
+        height: Dimensions.get("window").height/3,
+        width: "100%",
+        backgroundColor: "#7082d1",
+        paddingHorizontal: 40,
+    }, 
+    logo: {
+        width: 260,
+        height: 100,
+    },
+    titleImput: {
+        fontSize: 20,
+        color: "#fff",
+        marginTop: 20,
+    }
 })
