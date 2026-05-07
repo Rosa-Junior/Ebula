@@ -7,26 +7,27 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: themes.colors.background,
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         paddingHorizontal: 16,
-        paddingVertical: 24,
+        paddingVertical: 10,
     },
-
     boxTop: {
         maxWidth: 440,
         alignItems: "center",
         marginBottom: 20,
     },
     logo: { 
-        width: 150, height: 150, marginBottom: 5 
+        width: 150, 
+        height: 150,
+        alignItems: "center",
     },
     title: { 
         fontSize: 22, 
         fontWeight: "600", 
         color: themes.colors.primary, 
-        marginBottom: 6,
         fontFamily: themes.fonts.regular,
         textAlign: "center",
+        marginBottom: 10,
     },
     subtitle: { 
         fontSize: 18, 
@@ -34,6 +35,7 @@ export const styles = StyleSheet.create({
         fontFamily: themes.fonts.regular,
         color: themes.colors["on-surface-variant"], 
         textAlign: "center",
+        marginVertical: 6,
     },
 
     boxMid: {
@@ -42,16 +44,18 @@ export const styles = StyleSheet.create({
         borderColor: themes.colors["outline-variant"],
         borderWidth: 1,
         borderRadius: 12,
-        padding: 20,
+        padding: 30,
+        paddingVertical: 40,
         shadowColor: "#001",
-        shadowOpacity: 0.05,
+        shadowOpacity: 0.08,
         shadowRadius: 8,
-        elevation: 4,
+        elevation: 6,
         marginBottom: 16,
     },
     boxButton: {
         width: "100%",
         paddingHorizontal: 0,
+         marginBottom: 6,
     },
     registerLink: {
         marginTop: 16,

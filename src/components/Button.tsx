@@ -49,6 +49,7 @@ export default function Button({
 
 const styles = StyleSheet.create({
   button: {
+    marginVertical: 4,
     borderWidth: 1,
     borderRadius: 12,
     paddingHorizontal: 14,

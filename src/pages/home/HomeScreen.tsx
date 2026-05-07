@@ -1,34 +1,24 @@
+import React, { useState } from "react";
+import { useAuth } from "../../../hooks/useAuth";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { StyleSheet, View, Image, KeyboardAvoidingView, Platform, TouchableOpacity } from "react-native";
+import Snackbar from "../../../components/Snackbar";
+import { styles } from "../styles";
+import Logo from "../../../assets/ebula_logo.png";
+import { Provider as PaperProvider, Menu, TextInput, Text, Button } from 'react-native-paper';
+import { themes } from "../../../style/themes";
 
+type RootStackParamList = {
+    Login: undefined;
+    Home: undefined;
+    Register: undefined;
+};
 
+type Props = {
+    navigation: NativeStackNavigationProp<RootStackParamList, "Register">;
+};
 
-// import React, { useState } from "react";
-// import {
-//     Text,
-//     View,
-//     Image,
-// } from "react-native";
-// import Card from "./components/Card";
-
-
-// export default function HomeScreen() {
-//   return (
-//     <View style={styles.container}>
-//           <Card
-//             title="Buscar Medicamentos" 
-//             onPress={() => navigation.navigate("Search")}
-//           />
-//           <Card
-//             title="Favoritos"
-//             onPress={() => navigation.navigate("Favorites")}
-//           />
-//           <Card
-//             title="Meus Grupos"
-//             onPress={() => navigation.navigate("MyGroups")}
-//           />
-//           <Card
-//             title="Dúvidas"
-//             onPress={() => navigation.navigate("FAQ")}
-//           />
-//     </View>  
-//   );
-// }
+type Option = {
+    label: string;
+    value: string;
+};

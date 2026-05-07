@@ -31,9 +31,6 @@ export default function LoginScreen({ navigation }: Props) {
     async function handleLogin() {
         setLoading(true);
         try {
-            const emailRegex = /\S+@\S+\.\S+/;
-            if (!emailRegex.test(email)) throw new Error("Email inválido");
-            if (senha.length < 6) throw new Error("Senha precisa ter ao menos 6 caracteres");
             await login(email.trim().toLowerCase(), senha);
             navigation.replace("Home");
         } catch (err: any) {
@@ -46,7 +43,6 @@ export default function LoginScreen({ navigation }: Props) {
     <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : undefined}>
         <View style={styles.boxTop}>
             <Image source={Logo} style={styles.logo} resizeMode="contain" />
-
             <text style={styles.title}>Bem-vindo ao EBula</text>
             <text style={styles.subtitle}>Acesse suas informações médicas com precisão</text>
         </View>

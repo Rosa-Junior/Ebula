@@ -15,24 +15,20 @@ type RootStackParamList = {
 };
 
 type Props = {
-    navigation: NativeStackNavigationProp<RootStackParamList, "Login">;
+    navigation: NativeStackNavigationProp<RootStackParamList, "Register">;
 };
-
-
-
-
 
 type Option = {
     label: string;
     value: string;
 };
+
 const options: Option[] = [
     { label: "Médico", value: "medico" },
     { label: "Enfermeiro", value: "enfermeiro" },
     { label: "Técnico de Enfermagem", value: "tecnico" },
     { label: "Outro", value: "outro" },
 ];
-
 
 export default function NewUserRegister({ navigation }: Props) {
     const [visible, setVisible] = useState(false);
@@ -48,101 +44,109 @@ export default function NewUserRegister({ navigation }: Props) {
         options.find((option) => option.value === selected)?.label ||
         "Selecione uma opção";
 
-
-
-
-
-
-
     const { login } = useAuth();
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [categoriaProfissional, setCategoriaProfissional] = useState("");
     const [senha, setSenha] = useState("");
-
-
-
-
     const [loading, setLoading] = useState(false);
     const [snack, setSnack] = useState<{ visible: boolean; msg: string }>({ visible: false, msg: "" });
     const [showPassword, setShowPassword] = useState(false);
+    const emailRegex = /\S+@\S+\.\S+/;
+    const senhaRegex = /^[a-zA-Z0-9!#@$%&]{6,15}$/; // regex que  exige letras e números, com um limite de tamanho (6 a 15 caracteres)
 
-    async function handleLogin() {
-        setLoading(true);
+    async function handleRegister() {
+        setLoading(true)
+
         try {
-            const emailRegex = /\S+@\S+\.\S+/;
+            if (!nome.trim()) throw new Error("Nome obrigatório");
             if (!emailRegex.test(email)) throw new Error("Email inválido");
-            if (senha.length < 6) throw new Error("Senha precisa ter ao menos 6 caracteres");
+            if (!senhaRegex.test(senha)) throw new Error("Senha precisa ter: ao menos 6 caracteres, letras e números");
+            if (!categoriaProfissional.trim()) throw new Error("Categoria obrigatória");
             await login(email.trim().toLowerCase(), senha);
             navigation.replace("Home");
         } catch (err: any) {
-            setSnack({ visible: true, msg: err.message || "Erro ao autenticar" });
+            setSnack({ visible: true, msg: err.message || "Erro ao cadastrar" });
         } finally {
             setLoading(false);
         }
     }
+
+
     return (
         <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : undefined}>
             <View style={styles.boxTop}>
                 <Image source={Logo} style={styles.logo} resizeMode="contain" />
-
                 <text style={styles.title}>Bem-vindo ao EBula</text>
-                <Text variant="bodyLarge" style={{ alignItems: "center" }}>Informe seus dados para cadastro</Text>
+                <Text variant="bodyLarge" style={{ fontSize: 18, alignItems: "center" }}>Informe seus dados para cadastro</Text>
             </View>
 
             <View style={styles.boxMid}>
                 <TextInput
                     style={{ marginBottom: 4 }}
                     label="Nome Completo"
+                    placeholder="Maria Silva"
                     value={nome}
                     onChangeText={text => setNome(text)}
                     mode="outlined"
+                    outlineStyle={{borderRadius: 10}}
                 />
                 <TextInput
                     style={{ marginBottom: 4 }}
                     label="Email"
+                    placeholder="seuemail@email.com"
                     value={email}
                     onChangeText={text => setEmail(text)}
                     mode="outlined"
+                    outlineStyle={{borderRadius: 10}}
+        
                 />
                 <TextInput
-                    style={{ marginBottom: 4 }}
+                    style={{ marginBottom: 10 }}
                     label="Senha"
+                    placeholder="......"
                     value={senha}
                     onChangeText={text => setSenha(text)}
                     mode="outlined"
+                    cursorColor=""
+                    outlineStyle={{borderRadius: 10}}
                 />
 
                 <Menu
                     visible={visible}
                     onDismiss={closeMenu}
+                    style={stylesLocal.menu}
                     anchor={
                         <Button
                             mode="outlined"
                             onPress={openMenu}
                             contentStyle={stylesLocal.buttonContent}
                             style={stylesLocal.selectButton}
+                            labelStyle={stylesLocal.buttonLabel}
                         >
-                            {selectedLabel}
+                            {selectedLabel} 
                         </Button>
                     }
-                >
+                >   
                     {options.map((option) => (
                         <Menu.Item
                             key={option.value}
                             onPress={() => handleSelect(option.value)}
                             title={option.label}
+                            titleStyle={stylesLocal.menuItemTitle}
+                            style={stylesLocal.menuItem}
                         />
                     ))}
                 </Menu>
 
-
-                <br />
-
-                <Button style={{ padding: 6 }} mode="contained" onPress={handleLogin}>
+                <Button 
+                    style= {{ padding: 6, marginVertical: 12 }}
+                    labelStyle={stylesLocal.labelButton} 
+                    mode="contained"
+                    onPress={handleRegister}
+                    >
                     Cadastrar
                 </Button>
-
             </View>
             <Snackbar
                 visible={snack.visible}
@@ -155,25 +159,31 @@ export default function NewUserRegister({ navigation }: Props) {
 }
 
 const stylesLocal = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 50,
-        justifyContent: "center",
+    menu: {
+        marginTop: 5, // opcional: ajustar margem do container do menu
     },
-
-    label: {
-        marginBottom: 8,
-    },
-
-    selectButton: {
-        width: "100%",
-        justifyContent: "center",
-        color: themes.colors["on-surface-variant"]
-    },
-
     buttonContent: {
         height: 50,
         justifyContent: "space-between",
-        textAlign: "left"
+        textAlign: "left",
+    },
+    selectButton: {
+        width: "100%",
+        justifyContent: "center",
+    },
+    buttonLabel: {
+        color: themes.colors.primary,
+        fontSize: 16,
+    },
+    menuItemTitle: {
+        color: themes.colors["on-surface"], // cor do texto do menu
+        fontSize: 15,
+    },
+    menuItem: {
+        marginVertical: 6, // aumenta espaço vertical entre itens
+        paddingVertical: 8, // aumenta área clicável
+    },
+     labelButton: {
+    color: themes.colors["surface-container-lowest"], 
     },
 })
