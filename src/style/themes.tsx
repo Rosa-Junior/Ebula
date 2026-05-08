@@ -24,6 +24,7 @@ const colors = {
 export const themes = {
     colors: colors,
     // Fonte padrão Arial, pode ser personalizada conforme necessário
+
     fonts: {
         regular: "Arial, sans-serif",
     },
@@ -37,7 +38,7 @@ export const themes = {
             ...MD3LightTheme.colors,
             primary: colors.primary,
             onPrimary: "#fff",
-            secondary: "#465f88",
+            secondary: colors.secondary,
             
         }
     }

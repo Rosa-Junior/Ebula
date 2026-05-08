@@ -5,16 +5,12 @@ import { Text, View, Image, KeyboardAvoidingView, Platform, TouchableOpacity} fr
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Snackbar from "../../components/Snackbar";
-import { styles } from "./styles";
+import { styles } from "./register.styles";
 import Logo from "../../assets/ebula_logo.png";
 import { MaterialIcons } from "@expo/vector-icons";
 import { themes } from "../../style/themes";
-
-type RootStackParamList = {
-  Login: undefined; 
-  Home: undefined; 
-  Register: undefined;
-};
+import { Divider } from 'react-native-paper';
+import { RootStackParamList } from "../../navigation/types";
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, "Login">;
@@ -29,10 +25,10 @@ export default function LoginScreen({ navigation }: Props) {
   const [showPassword, setShowPassword] = useState(false);
 
     async function handleLogin() {
+        if (!email || !senha) {setSnack({ visible: true, msg: "Preencha todos os campos"}); return; }
         setLoading(true);
         try {
             await login(email.trim().toLowerCase(), senha);
-            navigation.replace("Home");
         } catch (err: any) {
             setSnack({ visible: true, msg: err.message || "Erro ao autenticar" });
         } finally {
@@ -43,8 +39,8 @@ export default function LoginScreen({ navigation }: Props) {
     <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : undefined}>
         <View style={styles.boxTop}>
             <Image source={Logo} style={styles.logo} resizeMode="contain" />
-            <text style={styles.title}>Bem-vindo ao EBula</text>
-            <text style={styles.subtitle}>Acesse suas informações médicas com precisão</text>
+            <Text style={styles.title}>Bem-vindo ao EBula</Text>
+            <Text style={styles.subtitle}>Acesse suas informações médicas com precisão</Text>
         </View>
         
         <View style={styles.boxMid}>
@@ -81,10 +77,13 @@ export default function LoginScreen({ navigation }: Props) {
                     loading={loading}
                     fullWidth={true}
                 />   
-
+                <Divider style={{ marginTop: 12, marginBottom: 6, backgroundColor: themes.colors["outline"] }} />
                 <TouchableOpacity style={styles.registerLink} onPress={() => navigation.navigate("Register")}>
                     <Text style={styles.registerText}>
-                        Não tem conta? Cadastre-se
+                        Não tem conta? 
+                        <Text style={{ fontWeight: "bold" }}>
+                            {" "}Cadastre-se
+                        </Text>
                     </Text>
                 </TouchableOpacity>
             </View> 

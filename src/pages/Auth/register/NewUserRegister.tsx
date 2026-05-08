@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { StyleSheet, View, Image, KeyboardAvoidingView, Platform, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Image, KeyboardAvoidingView, Platform, TouchableOpacity, TextBase } from "react-native";
 import Snackbar from "../../../components/Snackbar";
-import { styles } from "../styles";
+import { styles } from "../register.styles";
 import Logo from "../../../assets/ebula_logo.png";
 import { Provider as PaperProvider, Menu, TextInput, Text, Button } from 'react-native-paper';
 import { themes } from "../../../style/themes";
-
-type RootStackParamList = {
-    Login: undefined;
-    Home: undefined;
-    Register: undefined;
-};
+import { RootStackParamList } from "../../../navigation/types";
+import { registerLocal } from "../../../services/authService";
+import "react-native-get-random-values";
+import {v4 as uuidv4} from "uuid";
 
 type Props = {
     navigation: NativeStackNavigationProp<RootStackParamList, "Register">;
@@ -47,13 +45,12 @@ export default function NewUserRegister({ navigation }: Props) {
     const { login } = useAuth();
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
-    const [categoriaProfissional, setCategoriaProfissional] = useState("");
     const [senha, setSenha] = useState("");
     const [loading, setLoading] = useState(false);
     const [snack, setSnack] = useState<{ visible: boolean; msg: string }>({ visible: false, msg: "" });
     const [showPassword, setShowPassword] = useState(false);
     const emailRegex = /\S+@\S+\.\S+/;
-    const senhaRegex = /^[a-zA-Z0-9!#@$%&]{6,15}$/; // regex que  exige letras e números, com um limite de tamanho (6 a 15 caracteres)
+    const senhaRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!#@$%&]{6,15}$/; // regex que  exige letras e números, com um limite de tamanho (6 a 15 caracteres)
 
     async function handleRegister() {
         setLoading(true)
@@ -62,16 +59,26 @@ export default function NewUserRegister({ navigation }: Props) {
             if (!nome.trim()) throw new Error("Nome obrigatório");
             if (!emailRegex.test(email)) throw new Error("Email inválido");
             if (!senhaRegex.test(senha)) throw new Error("Senha precisa ter: ao menos 6 caracteres, letras e números");
-            if (!categoriaProfissional.trim()) throw new Error("Categoria obrigatória");
-            await login(email.trim().toLowerCase(), senha);
-            navigation.replace("Home");
+            if (!selected) throw new Error("Selecione uma categoria profissional");
+            await registerLocal(
+                {
+                     id: uuidv4(),
+                    nome,
+                    email: email.trim().toLowerCase(),
+                    categoriaProfissional: selected,
+                }, senha
+            )
+            setSnack({ visible: true, msg: "Usuário criado com sucesso!"});
+            
+            setTimeout(() => {
+                navigation.navigate("Login");
+            }, 1500);
         } catch (err: any) {
             setSnack({ visible: true, msg: err.message || "Erro ao cadastrar" });
         } finally {
             setLoading(false);
         }
     }
-
 
     return (
         <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : undefined}>
@@ -80,7 +87,6 @@ export default function NewUserRegister({ navigation }: Props) {
                 <text style={styles.title}>Bem-vindo ao EBula</text>
                 <Text variant="bodyLarge" style={{ fontSize: 18, alignItems: "center" }}>Informe seus dados para cadastro</Text>
             </View>
-
             <View style={styles.boxMid}>
                 <TextInput
                     style={{ marginBottom: 4 }}
@@ -108,10 +114,8 @@ export default function NewUserRegister({ navigation }: Props) {
                     value={senha}
                     onChangeText={text => setSenha(text)}
                     mode="outlined"
-                    cursorColor=""
                     outlineStyle={{borderRadius: 10}}
                 />
-
                 <Menu
                     visible={visible}
                     onDismiss={closeMenu}
@@ -138,7 +142,6 @@ export default function NewUserRegister({ navigation }: Props) {
                         />
                     ))}
                 </Menu>
-
                 <Button 
                     style= {{ padding: 6, marginVertical: 12 }}
                     labelStyle={stylesLocal.labelButton} 
@@ -155,7 +158,6 @@ export default function NewUserRegister({ navigation }: Props) {
             />
         </KeyboardAvoidingView>
     );
-
 }
 
 const stylesLocal = StyleSheet.create({
