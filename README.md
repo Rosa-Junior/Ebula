@@ -81,12 +81,6 @@ npm install uuid react-native-get-random-values
 - 🎨 8. React Native Paper & Componentes (UI)
     - Paper é uma coleção de componentes personalizáveis ​​e prontos para produção para React Native, seguindo as diretrizes do Material Design do Google.
     - Desenvolvimento de componentes próprios
-
-- 🔤 9. TypeScript
-    - Linguagem de programação tipada
-    
-- 🧩 10. API externa para integração dos dados
-    - PharmaDB
 ---
 
 ### 🧠 Arquitetura
