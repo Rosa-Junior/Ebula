@@ -21,7 +21,8 @@ const colors = {
     medium_gray: "#737685",
     background_card: "#dbeafe",
     background_noble_gray: "#4f5052",
-    red: "#ff0000"
+    red: "#ff0000",
+    offline: "#6b7280",
 }
 
 export const themes = {

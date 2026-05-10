@@ -3,76 +3,81 @@ import { View, ScrollView } from "react-native";
 import { Provider as PaperProvider, Text, Card, Searchbar, Button, IconButton } from 'react-native-paper';
 import { styles } from "../Group/group.styles";
 import { themes } from "../../style/themes";
-import { useNavigation } from "@react-navigation/native";
-import MedicationCard from "../../components/MedicationCard";
 import GroupCard from "../../components/GroupCard";
 import AppHeader from "../../components/AppHeader";
+import { groups } from "../../mock/group";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../navigation/types";
+import { useNavigation } from "@react-navigation/native";
+import { useAuth } from "../../hooks/useAuth";
+
+type NavigationProps = NativeStackNavigationProp<
+  RootStackParamList,
+  "Main"
+>;
 
 export default function GroupScreen() {
-  const navigation = useNavigation();
-  const [search, setSearch] = useState("");
+    const navigation = useNavigation<NavigationProps>();
+    const { logout } = useAuth();
 
-  async function registerNewGroup() {
+    async function registerNewGroup() {
+        return "Grupo Criado"
+    }
 
-    return "Grupo";
-  }
+    function handleLogout() {
+         logout();
+    }
 
-  return (
+    return (
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false} >
-            <AppHeader title="EBula" nameIcon="laptop-medical" />
+            <AppHeader 
+                title="EBula" 
+                nameIcon="laptop-medical"
+                rightAction="logout"
+                onLogoutPress={handleLogout} 
+            />
             <View style={styles.content}>
-                <View >
-                    <View>
+                <View style={styles.headerRow}>
+                    <View style={styles.textGroup}>
                         <Text style={styles.title}>Meus Grupos</Text>
-                        <IconButton
+                        
+                        <Text style={styles.subtitle}>Gerencie suas categorias de medicamentos de forma organizada</Text>
+                    </View>
+                    <IconButton
                         icon="magnify"
                         size={24}
                         iconColor={themes.colors.primary}
-                        style={styles.iconButton}
                         onPress={() => {}}
                         />
-                        <Text style={styles.subtitle}>Gerencie suas categorias de medicamentos de forma organizada</Text>
-                    </View>
-                    <Button 
-                        style= {styles.button}
-                        labelStyle={styles.labelButton} 
-                        mode="contained"
-                        icon="folder-plus"
-                        onPress={registerNewGroup}
-                    >
-                        Criar Grupo
-                    </Button>
                 </View>
-                {/* <Searchbar
-                    placeholderTextColor={themes.colors.outline}
-                    value={search}
-                    onChangeText={setSearch}
-                    style={styles.search}
-                    inputStyle={styles.searchInput}
-                    iconColor={themes.colors.outline}
-                /> */}
-                <Card style={styles.highlightCard}>
-                  <View>
-                    
-                  </View>
-                </Card>
+                <Button 
+                    style= {styles.button}
+                    labelStyle={styles.labelButton} 
+                    mode="contained"
+                    icon="folder-plus"
+                    onPress={registerNewGroup}
+                >
+                    Criar Grupo
+                </Button>
+                {groups.map(group => (
                 <GroupCard
-                    title="Analgésicos"
-                    totalMedicamentos={12}
-                    onPress={() => navigation.navigate("Detail")}
+                    key={group.id}
+                    title={group.nome}
+                    description={group.description}
+                    totalMedicamentos={group.totalMedications}
+                    onPress={() => navigation.navigate("DetailGroup", {
+                      id: group.id,
+                    })}
                 />
-                <GroupCard
-                title="Cardiológicos"
-                totalMedicamentos={8}
-                onPress={() => navigation.navigate("Detail")}
-                />
-                {/* <FlatList    // listar card de medicamentos
-                  data={medicamentos}
+                ))}
+                {/* <FlatList    // listar card de grupos
+                  data={grupos}
                   keyExtractor={(item) => item.id.toString()}
                   renderItem={({ item }) => (
-                    <MedicationCard
+                    <GroupCard
                       title={item.nome}
-                      subtitle={item.principioAtivo}
+                      description={item.description}
+                      totalMedicamentos=={item.totalMedicamentos}
                       onPress={() => navigation.navigate("Detail")}
                     />
                   )}
@@ -80,5 +85,4 @@ export default function GroupScreen() {
             </View>
         </ScrollView>
     );
-
 }

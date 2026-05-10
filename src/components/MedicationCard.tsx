@@ -58,7 +58,6 @@ export default function MedicationCard({ title, subtitle, onPress, }: Props) {
 const styles = StyleSheet.create({
 
     recentCard: {
-      marginBottom: 12,
       borderRadius: 14,
       backgroundColor: themes.colors["surface-container-lowest"],
       borderWidth: 1,

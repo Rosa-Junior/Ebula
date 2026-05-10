@@ -7,24 +7,29 @@ import { themes } from "../style/themes";
 
 type Props = {
   title: string;
+  description: string,
   totalMedicamentos: number;
   onPress: () => void;
 };
 
 export default function GroupCard({
   title,
+  description,
   totalMedicamentos,
   onPress,
 }: Props) {
   return (
     <Card style={styles.card}>
       
-      <View style={styles.header}>
-
-        <Text style={styles.title}>
-          {title}
-        </Text>
-
+      <View style={styles.headerRow}>
+        <View style={styles.header}>
+            <Text style={styles.title}>
+            {title}
+            </Text>
+            <Text style={styles.description}>
+            {description}
+            </Text>
+        </View>    
         <View style={styles.badge}>
           <Text style={styles.badgeText}>
             {totalMedicamentos} medicamentos
@@ -55,24 +60,32 @@ export default function GroupCard({
 const styles = StyleSheet.create({
 
   card: {
-    padding: 18,
+    paddingHorizontal: 18,
+    paddingVertical: 28,
     borderRadius: 18,
-    marginBottom: 14,
     backgroundColor: themes.colors["surface-container-lowest"],
   },
-
-  header: {
+  headerRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
+    alignItems: "flex-start",
   },
-
+  header: {
+    flex: 1,
+    marginRight: 10,
+    gap: 8,
+  },
   title: {
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: "600",
     color: themes.colors["on-surface-variant"],
   },
-
+  description:{
+    fontSize: 14,
+    fontFamily: themes.fonts.regular,
+    fontWeight: "semibold",
+    color: themes.colors["on-surface-variant"],
+  },
   badge: {
     backgroundColor:themes.colors.background_card,
     paddingHorizontal: 12,

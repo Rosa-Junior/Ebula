@@ -8,12 +8,13 @@ export const styles = StyleSheet.create({
         backgroundColor: themes.colors.background,
     },
     content: {
+        marginTop: 10,
         paddingHorizontal: 18,
         paddingVertical: 18,
-        color: themes.colors.outline
+        color: themes.colors.outline,
+        gap: 25
     },
     search: {
-        marginBottom: 20,
         backgroundColor: themes.colors["surface-container-lowest"],
         borderWidth: 1,
         borderColor: themes.colors.outline_grayscale,
@@ -28,9 +29,16 @@ export const styles = StyleSheet.create({
     highlightCard: {
         borderRadius: 16,
         overflow: "hidden",
-        marginVertical: 14,
         elevation: 4,
         backgroundColor: themes.colors["surface-container-lowest"],
+    },
+    overlay: {
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        padding: 20,
+        backgroundColor: "rgba(0,0,0,0.35)",
     },
     cardImage: {
         height: 210,
@@ -38,7 +46,6 @@ export const styles = StyleSheet.create({
     cardTitle: {
         color: themes.colors["surface-container-lowest"],
         fontWeight: "600",
-        marginBottom: 6,
         paddingHorizontal: 10,
         paddingTop: 8,
     },
@@ -49,8 +56,7 @@ export const styles = StyleSheet.create({
         paddingBottom: 8
     },
     sectionTitle: {
-        marginTop: 28,
-        marginBottom: 14,
+        marginTop: 10,
         fontWeight: "bold",
         color: themes.colors.primary,
     },

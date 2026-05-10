@@ -5,4 +5,7 @@ export type RootStackParamList = {
     id: number;
   };
   Main: undefined;
+  DetailGroup:  {
+    id: number;
+  };
 };

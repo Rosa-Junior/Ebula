@@ -1,40 +1,114 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
-import { useAuth } from "../../hooks/useAuth";
+import { View, } from "react-native";
+import { RouteProp, useRoute } from "@react-navigation/native";
+import { RootStackParamList } from "../../navigation/types";
+import { Provider as PaperProvider, Text, Divider, Card, Searchbar, IconButton  } from 'react-native-paper';
+import { medications } from "../../mock/medications";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Provider as PaperProvider, Menu, BottomNavigation, TextInput, Button } from 'react-native-paper';
+import { useNavigation } from "@react-navigation/native";
+import AppHeader from "../../components/AppHeader";
+import { styles } from "../Group/group.styles";
+import { useAuth } from "../../hooks/useAuth";
 
-// type RootStackParamList = {
-//    Home: undefined;
-//    Login: undefined;
-//    Register: undefined;
-//    Detail: {
-//     id: number;
-//   };
-// };
+type DetailRouteProp = RouteProp<
+  RootStackParamList,
+  "Detail"
+>;
 
-// type Props = {
-//    navigation: NativeStackNavigationProp<RootStackParamList, "Detail">;
-// };
+type NavigationProps = NativeStackNavigationProp<
+  RootStackParamList
+>;
 
-// type Option = {
-//     label: string;
-//     value: string;
-// };
-
-// export default function DetailScreen({navigation}: Props) {
-// const {login } = useAuth();
-//   const [email, setEmail] = useState("");
-//   const [senha, setSenha] = useState("");
-//   const [loading, setLoading] = useState(false);
-//   const [snack, setSnack] = useState<{ visible: boolean; msg: string }>({ visible: false, msg: "" });
-//   const [showPassword, setShowPassword] = useState(false);
-//   return ;
-// }
 export default function DetailScreen() {
+  const route = useRoute<DetailRouteProp>();
+  const navigation = useNavigation<NavigationProps>();
+   const { logout } = useAuth();
+
+  // const medicamento = detailMedication[0];
+
+  const {id} = route.params;
+
+  const medicamento = medications.find(
+    (med) => med.id === id
+  );
+
+  if (!medicamento) {
+   return (
+      <View>
+        <Text>Medicamento não encontrado</Text>
+      </View>
+   );
+  }
+
+  function handleBackPress() {
+    navigation.goBack()
+  }
+  // function handleLogout() {
+  //      logout();
+  // }
+
   return (
-    <View>
-      <Text>Detalhes</Text>
+    <View style={styles.containerCard}>
+      <AppHeader 
+        title="EBula" 
+        nameIcon="laptop-medical"
+        rightAction="back"
+        onBack={handleBackPress} 
+      />
+      <View style={styles.contentCard}>
+        <Card style={styles.card}>
+          <Card.Content>
+            <View style={styles.tagsContainer}>
+              <View style={styles.categoryBadge}>
+                <Text style={styles.categoryText}>
+                  {medicamento.categoria}
+              
+                </Text>
+              </View>
+
+              <View style={styles.tarjaBadge}>
+                <Text style={styles.tarjaText}>
+                  {medicamento.tarja}
+          
+                </Text>
+              </View>
+            </View>  
+            <Text style={styles.title}>
+              {medicamento.nome}
+            
+            </Text>
+
+            <Text style={styles.subtitle}>
+              {medicamento.principioAtivo}
+            
+            </Text>
+
+            <Divider style={styles.divider} />
+            <View style={styles.infoContainer}>
+              <View>
+                <Text style={styles.label}>
+                  DOSAGEM COMUM
+                </Text>
+
+                <Text style={styles.infoText}>
+                 {medicamento.dosagem}
+          
+                </Text>
+              </View>
+              <View>
+                <Text style={styles.label}>
+                  TEMPO DE ABSORÇÃO
+                </Text>
+
+                <Text style={styles.infoText}>
+                  {medicamento.absorcao}
+          
+                </Text>
+              </View>
+            </View>
+          </Card.Content>
+        </Card>
+      </View>
     </View>
   );
 }

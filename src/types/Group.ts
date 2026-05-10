@@ -1,7 +1,8 @@
-export interface Grupo {
-    id: string;
+export interface Group {
+    id: number;
     nome: string;
-    cor: string;
-    medicamentos: string[]; // IDs dos medicamentos
-    criadoEm: Date;
+    description: string;
+    totalMedications: number;
+    medicationIds: number[], // IDs dos medicamentos
+    // criadoEm?: Date;
 }

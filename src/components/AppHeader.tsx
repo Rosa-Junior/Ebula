@@ -2,17 +2,28 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { Appbar } from "react-native-paper";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import { MaterialIcons } from "@expo/vector-icons";
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 import { themes } from "../style/themes";
 
 type Props = {
   title?: string;
   nameIcon: string;
-  showProfile?: boolean;
+  rightAction?: "profile" | "logout" | "back" | "none";
   onProfilePress?: () => void;
+  onLogoutPress?: () => void;
+  onBack?: () => void;
 };
 
-export default function AppHeader({ title = "EBula", nameIcon, showProfile = true, onProfilePress,}: Props) {
+export default function AppHeader({ 
+    title = "EBula", 
+    nameIcon, 
+    rightAction = "profile", 
+    onProfilePress, 
+    onLogoutPress,
+    onBack
+}: Props) {
   return (
     <Appbar.Header style={styles.appbar}>
       <View style={styles.leftContainer}>
@@ -28,11 +39,31 @@ export default function AppHeader({ title = "EBula", nameIcon, showProfile = tru
       </Text>
     </View>
 
-      {showProfile && (
+      {rightAction === "profile" &&  (
         <Appbar.Action
           icon="account-circle-outline"
           iconColor={themes.colors.primary}
           onPress={onProfilePress}
+        />
+      )}
+      {rightAction === "logout" &&  (
+        <Appbar.Action
+          icon="logout"
+          iconColor={themes.colors.primary}
+          onPress={onLogoutPress}
+        />
+      )}
+      {rightAction === "back" &&  (
+        <Appbar.Action
+            icon={({ size, color }) => (
+                <AntDesign
+                    name="rollback"
+                    size={20}
+                    color={themes.colors.primary}
+                />
+            )}
+          iconColor={themes.colors.primary}
+          onPress={onBack}
         />
       )}
 

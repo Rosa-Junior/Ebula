@@ -7,9 +7,22 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: themes.colors.background,
     },
+    content: {
+        paddingHorizontal: 18,
+        paddingVertical: 18,
+        color: themes.colors.outline,
+        gap: 25
+    },
+    textGroup: {
+        flex: 1,
+    },
+    headerRow: {
+        flexDirection: "row",
+        alignContent:'flex-start',
+    },
     title: { 
         fontSize: 22, 
-        fontWeight: "600", 
+        fontWeight: "bold", 
         color: themes.colors.primary, 
         fontFamily: themes.fonts.regular,
         textAlign: "left",
@@ -25,7 +38,6 @@ export const styles = StyleSheet.create({
     },
     button: {
         padding: 6, 
-        marginVertical: 14, 
         borderRadius: 12,
         backgroundColor: themes.colors.primary_container
     },
@@ -34,88 +46,85 @@ export const styles = StyleSheet.create({
         fontWeight: "600",
         color: themes.colors["surface-container-lowest"], 
     },
-    iconButton: {
-        justifyContent: "flex-end",
+    containerCard: {
+        flex: 1,
+        backgroundColor: themes.colors["surface-container-lowest"], 
     },
-    logoContainer: {
-        width: 36,
-        height: 36,
-        borderRadius: 20,
-        backgroundColor: "#deebff",
-        justifyContent: "center",
-        alignItems: "center",
-        margin: 8,
+    contentCard: {
+        padding: 16,
     },
-    content: {
-        paddingHorizontal: 18,
-        paddingVertical: 18,
-        color: themes.colors.outline
-    },
-    search: {
-        marginBottom: 20,
-        backgroundColor: themes.colors["surface-container-lowest"],
-        borderWidth: 1,
-        borderColor: themes.colors.outline_grayscale,
-        borderRadius: 12,
-        elevation: 0,
-        height: 52,
-    },
-    searchInput: {
-        color: themes.colors["on-surface-variant"],
-        fontSize: 15,
-    },
-    highlightCard: {
-        borderRadius: 16,
-        overflow: "hidden",
-        marginVertical: 14,
-        elevation: 4,
-        backgroundColor: themes.colors["surface-container-lowest"],
-    },
-    cardImage: {
-        height: 210,
-    },
-    overlay: {
-        position: "absolute",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        padding: 20,
-        backgroundColor: "rgba(0,0,0,0.35)",
-    },
-    cardTitle: {
-        color: themes.colors["surface-container-lowest"],
-        fontWeight: "600",
-        marginBottom: 6,
-    },
-    cardSubtitle: {
-        color: themes.colors["surface-container-lowest"],
-        lineHeight: 20,
-    },
-    sectionTitle: {
-        marginTop: 28,
-        marginBottom: 14,
-        fontWeight: "bold",
-        color: themes.colors.primary,
-    },
-    recentCard: {
-        marginBottom: 12,
-        borderRadius: 14,
-        backgroundColor: themes.colors["surface-container-lowest"],
-        borderWidth: 1,
-        borderColor: "#F1F5F9",
-    },
-    titleCardContext:{
-        fontWeight: "bold",
-        color: themes.colors.secondary,
-    },
-    cardContent: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-    },
-    leftContent: {
-        flexDirection: "row",
-        alignItems: "center",
-        color: themes.colors["surface-container-lowest"],
-    },
+    card: {
+    borderRadius: 20,
+    backgroundColor: "#fff",
+    elevation: 2,
+    paddingVertical: 8,
+  },
+
+  tagsContainer: {
+    flexDirection: "row",
+    marginBottom: 18,
+    gap: 8,
+  },
+
+  categoryBadge: {
+    backgroundColor: "#dbeafe",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 20,
+  },
+
+  categoryText: {
+    color: themes.colors.primary,
+    fontWeight: "700",
+    fontSize: 12,
+  },
+
+  tarjaBadge: {
+    backgroundColor: "#e5e7eb",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 20,
+  },
+
+  tarjaText: {
+    color: "#374151",
+    fontWeight: "700",
+    fontSize: 12,
+  },
+
+  titleCard: {
+    fontSize: 28,
+    fontWeight: "700",
+    color: "#0f172a",
+    marginBottom: 6,
+  },
+
+  subtitleCard: {
+    fontSize: 16,
+    color: "#64748b",
+    marginBottom: 20,
+  },
+
+  divider: {
+    marginBottom: 20,
+    backgroundColor: "#e2e8f0",
+  },
+
+  infoContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
+  label: {
+    fontSize: 12,
+    color: "#94a3b8",
+    fontWeight: "700",
+    marginBottom: 8,
+  },
+
+  infoText: {
+    fontSize: 16,
+    color: "#0f172a",
+    fontWeight: "600",
+  },
 });
