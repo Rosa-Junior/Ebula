@@ -185,7 +185,7 @@ const stylesLocal = StyleSheet.create({
         marginVertical: 6, // aumenta espaço vertical entre itens
         paddingVertical: 8, // aumenta área clicável
     },
-     labelButton: {
+    labelButton: {
     color: themes.colors["surface-container-lowest"], 
     },
 })
